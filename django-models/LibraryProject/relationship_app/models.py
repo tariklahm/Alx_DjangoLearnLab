@@ -14,6 +14,10 @@ class Book(models.Model):
     def __str__(self):
         return self.title
     
+# simple text list of book titles and their authors.
+
+
+
 #Library Model:
 class Library(models.Model):
     name=models.CharField(max_length=50)
