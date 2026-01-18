@@ -11,7 +11,7 @@ books=author.books.all()
 
 
 #List all books in a library.
-library=Library.objects.get(id=1)
+library=Library.objects.get(name='library_name')
 books=library.books.all()
 
 #Retrieve the librarian for a library.
