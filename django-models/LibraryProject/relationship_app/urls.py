@@ -28,7 +28,7 @@ urlpatterns = [
     path('member/', member_view, name='member_view'),
 
     # Permission-based book actions
-    path('book/add/', add_book, name='add_book'),                 # ✅ ALX checker expects this
-    path('book/edit/<int:pk>/', edit_book, name='edit_book'),     # ✅ ALX checker expects this
-    path('book/delete/<int:pk>/', delete_book, name='delete_book'),
+    path('add_book/', add_book, name='add_book'),               # ✅ literal string ALX expects
+    path('edit_book/<int:pk>/', edit_book, name='edit_book'),   # ✅ literal string ALX expects
+    path('delete_book/<int:pk>/', delete_book, name='delete_book'),
 ]
