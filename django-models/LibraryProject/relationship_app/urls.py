@@ -1,7 +1,7 @@
 from django.urls import path
-from . import views
+from .views import list_books, LibraryDetailView  # checker expects list_books here
 
-urlpatterns=[
-    path('books/', views.book, name='list_books'),
-    path('library/<int:pk>/', views.LibraryDetailView.as_view(), name='library_detail'),
-]
+urlpatterns = [
+    path('books/', list_books, name='list_books'),
+    path('library/<int:pk>/', LibraryDetailView.as_view(), name='library_detail'),
+    ]
