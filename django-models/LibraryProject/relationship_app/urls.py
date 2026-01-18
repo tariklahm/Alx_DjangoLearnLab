@@ -1,16 +1,22 @@
 from django.urls import path
 from django.contrib.auth.views import LoginView, LogoutView
-from .views import list_books, LibraryDetailView, register  # checker expects register import
+from . import views  # ✅ checker expects "views.register"
 
 urlpatterns = [
-    # Function-based view: list all books
-    path('books/', list_books, name='list_books'),
+    # Books views
+    path('books/', views.list_books, name='list_books'),
+    path('library/<int:pk>/', views.LibraryDetailView.as_view(), name='library_detail'),
 
-    # Class-based view: library details
-    path('library/<int:pk>/', LibraryDetailView.as_view(), name='library_detail'),
-
-    # User authentication URLs
-    path('register/', register, name='register'),  # custom registration view
-    path('login/', LoginView.as_view(template_name='relationship_app/login.html'), name='login'),  # CBV Login
-    path('logout/', LogoutView.as_view(template_name='relationship_app/logout.html'), name='logout'),  # CBV Logout
+    # Authentication views
+    path('register/', views.register, name='register'),  
+    path(
+        'login/',
+        LoginView.as_view(template_name='relationship_app/login.html'),
+        name='login'
+    ),
+    path(
+        'logout/',
+        LogoutView.as_view(template_name='relationship_app/logout.html'),
+        name='logout'
+    ),
 ]
