@@ -11,5 +11,7 @@ library_name = "Central Library"
 library = Library.objects.get(name=library_name)
 books_in_library = library.books.all()
 
+
 # Retrieve the librarian for a library (by name)
-librarian = library.librarian
+library = Library.objects.get(name=library_name)
+librarian = Librarian.objects.get(library=library)
