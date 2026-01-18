@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import (
     permission_required,
     user_passes_test,
 )
+from django.contrib.auth.decorators import permission_required
 
 from django.contrib import messages
 from django.http import HttpResponse
