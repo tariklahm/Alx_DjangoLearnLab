@@ -1,14 +1,11 @@
 from django.shortcuts import render
-from django.http import HttpResponse
-from .models import Book
 from django.views.generic.detail import DetailView
-from bookshelf.models import Library  # Adjust if your Library model is in another app
-# Create your views here.
+from bookshelf.models import Book, Library
 
-def book(request):
-    books_list= Book.objects.all()
-    book={'books':books_list}
-    return render(request,'relationship_app/list_books.html' ,book)
+def list_books(request):
+    books_list = Book.objects.all()
+    context = {'books': books_list}
+    return render(request, 'relationship_app/list_books.html', context)
 class LibraryDetailView(DetailView):
     model = Library
     template_name = 'relationship_app/library_detail.html'
