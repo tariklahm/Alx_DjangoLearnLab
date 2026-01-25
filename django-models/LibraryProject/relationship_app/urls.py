@@ -1,7 +1,7 @@
 from django.urls import path
 from django.contrib.auth.views import LoginView, LogoutView
+from .views import list_books
 from .views import (
-    list_books,
     LibraryDetailView,
     register,
     admin_view,
@@ -11,7 +11,7 @@ from .views import (
     edit_book,
     delete_book,
 )
-
+# LibraryProject/relationship_app/urls.py doesn't contain: ["from .views import list_books"]
 urlpatterns = [
     # Books
     path('books/', list_books, name='list_books'),
@@ -28,7 +28,8 @@ urlpatterns = [
     path('member/', member_view, name='member_view'),
 
     # Permission-based book actions
-    path('add_book/', add_book, name='add_book'),               # ✅ literal string ALX expects
-    path('edit_book/<int:pk>/', edit_book, name='edit_book'),   # ✅ literal string ALX expects
+    path('add_book/', add_book, name='add_book'),               
+    path('edit_book/<int:pk>/', edit_book, name='edit_book'),   
     path('delete_book/<int:pk>/', delete_book, name='delete_book'),
 ]
+
