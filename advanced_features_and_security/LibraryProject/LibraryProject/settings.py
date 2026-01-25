@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'relationship_app.apps.RelationshipAppConfig',
 ]
 # Update Settings to Use the Custom User Model
-AUTH_USER_MODEL = 'relationship_app.CustomUser'
+
+AUTH_USER_MODEL = 'bookshelf.CustomUser'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
