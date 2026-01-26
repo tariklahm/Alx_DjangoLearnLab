@@ -17,7 +17,10 @@ from .models import Library, Book
 # =============================
 # Books Views
 # =============================
-
+@login_required
+def book_list(request):
+    books_list = Book.objects.all()
+    return render(request, 'relationship_app/list_books.html', {'books': books_list})
 @login_required
 def list_books(request):
     books_list = Book.objects.all()
