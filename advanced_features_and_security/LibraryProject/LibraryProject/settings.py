@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-$t^r!%m03j)h@@ly6)_z@zyx2@5pg7)9*#m)+^&5vsyt#^7!+9'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False # false for production and true for dev
 
 ALLOWED_HOSTS = []
 
@@ -123,3 +123,17 @@ STATIC_URL = 'static/'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+
+
+# Browser security protections
+
+SECURE_BROWSER_XSS_FILTER = True
+
+X_FRAME_OPTIONS = 'DENY'
+
+SECURE_CONTENT_TYPE_NOSNIFF = True
+
+# Secure cookies (HTTPS only)
+
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
