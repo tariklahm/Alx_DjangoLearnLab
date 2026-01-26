@@ -23,7 +23,7 @@ def list_books(request):
     books_list = Book.objects.all()
     return render(request, 'relationship_app/list_books.html', {'books': books_list})
 
-
+# @permission_required('relationship_app.can_edit', raise_exception=True) 
 class LibraryDetailView(DetailView):
     model = Library
     template_name = 'relationship_app/library_detail.html'
