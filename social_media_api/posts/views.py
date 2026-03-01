@@ -11,7 +11,7 @@ from rest_framework import permissions
 from django.shortcuts import get_object_or_404
 from notifications.models import Notification
 from django.contrib.contenttypes.models import ContentType
-
+from rest_framework import generics
 
 class PostPagination(PageNumberPagination):
     page_size = 5
@@ -53,12 +53,9 @@ def feed_view(request):
 @api_view(['POST'])
 @permission_classes([permissions.IsAuthenticated])
 def like_post(request, pk):
-    post = get_object_or_404(Post, pk=pk)
+    post = generics.get_object_or_404(Post, pk=pk)
 
-    like, created = Like.objects.get_or_create(
-        user=request.user,
-        post=post
-    )
+    like, created = Like.objects.get_or_create(user=request.user, post=post)
 
     if not created:
         return Response({"message": "Post already liked"}, status=400)
@@ -66,17 +63,16 @@ def like_post(request, pk):
     Notification.objects.create(
         recipient=post.author,
         actor=request.user,
-        verb="liked your post",
-        target_content_type=ContentType.objects.get_for_model(Post),
-        target_object_id=post.id
+        verb="liked your post"
     )
 
     return Response({"message": "Post liked successfully"})
 
+
 @api_view(['POST'])
 @permission_classes([permissions.IsAuthenticated])
 def unlike_post(request, pk):
-    post = get_object_or_404(Post, pk=pk)
+    post = generics.get_object_or_404(Post, pk=pk)
 
     like = Like.objects.filter(user=request.user, post=post).first()
     if not like:
