@@ -7,10 +7,12 @@ from rest_framework.pagination import PageNumberPagination
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from django.contrib.auth import get_user_model
+from rest_framework import permissions
+
+
 
 class PostPagination(PageNumberPagination):
     page_size = 5
-
 
 class PostViewSet(viewsets.ModelViewSet):
     queryset = Post.objects.all().order_by('-created_at')
@@ -37,11 +39,11 @@ User = get_user_model()
 
 
 @api_view(['GET'])
-@permission_classes([IsAuthenticated])
+@permission_classes([permissions.IsAuthenticated])
 def feed_view(request):
-    followed_users = request.user.following.all()
+    following_users = request.user.following.all()
 
-    posts = Post.objects.filter(author__in=followed_users).order_by('-created_at')
+    posts = Post.objects.filter(author__in=following_users).order_by('-created_at')
 
     serializer = PostSerializer(posts, many=True)
     return Response(serializer.data)
